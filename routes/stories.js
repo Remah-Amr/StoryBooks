@@ -47,12 +47,9 @@ router.get('/show/:id', (req, res) => {
 
 // Edit story
 router.get('/edit/:id',ensureAuthenticated,(req,res)=>{
-  Story.findOne({ // because don't return array 'maybe'
+  Story.findOne({
     _id : req.params.id
   }).then(story => {
-    //console.log(story.user);
-    // console.log(story.user.id); differnt because i don't do populate here
-    // i still put this also when i remove icon because no person can write url above and access
     if(story.user != req.user.id)
     {
       res.redirect('/stories');
@@ -62,8 +59,14 @@ router.get('/edit/:id',ensureAuthenticated,(req,res)=>{
         story:story
       })
     }
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
   })
 })
+//console.log(story.user);
+// console.log(story.user.id); differnt because i don't do populate here
+// i still put this also when i remove icon because no person can write url above and access
 
 // Edit process
 router.put('/:id', (req, res) => { // i can put url same but method differnt , mean i can put get and post with the same url
