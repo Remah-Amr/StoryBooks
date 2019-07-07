@@ -1,0 +1,32 @@
+<h1>Stories</h1>
+<div class="row">
+  {{#each stories}}
+    <div class="col s12 m4">
+      <div class="card">
+        <!--Icon of pencil Editing-->
+        <div class="card-image">
+            {{{editIcon user.id ../user.id id}}} <!--triple because we have html code , ../ mean be out of scope stories and user this be that global one-->
+        </div>
+        <!--END Icon of pencil Editing-->
+        <div class="card-content center-align">
+          <h5>{{title}}</h5>
+          <!--First will use truncate space str space length then result is input to stripTags func -->
+          <p class="story-text">{{stripTags (truncate body 150)}}</p> <!--You must make space between stripTags and (truncate)-->
+          <br>
+          <!--Name and image-->
+
+          <div class="chip">
+            <img src="{{user.image}}">
+            <a href="/stories/user/{{user.id}}">{{user.firstName}} {{user.lastName}}</a>
+          </div>
+        </div>
+       <!--Last Section of read more-->
+        <div class="card-action center-align">
+          <a class="btn grey" href="/stories/show/{{id}}">Read More</a>
+        </div>
+      </div>
+    </div>
+  {{else}}
+    <p>No stories found</p>
+  {{/each}}
+</div>
