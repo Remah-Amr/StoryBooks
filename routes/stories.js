@@ -172,6 +172,9 @@ router.post('/',(req,res)=>{
 
   new Story(newStory).save().then(story => {
     res.redirect(`/stories/show/${story.id}`) // we put ${} because we in js file not handlebars
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
   })
 })
 
