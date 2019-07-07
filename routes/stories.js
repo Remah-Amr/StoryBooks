@@ -13,7 +13,10 @@ router.get('/',(req,res)=>{
   .then(stories => {
       res.render('stories/index',{stories : stories}
     );
-  });
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
+  })
 });
 
 // Show Single Story
@@ -41,7 +44,10 @@ router.get('/show/:id', (req, res) => {
         res.redirect('/stories');
       }
     }
-  });
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
+  })
 });
 
 
@@ -92,7 +98,10 @@ router.put('/:id', (req, res) => { // i can put url same but method differnt , m
       .then(story => { // story after save
         res.redirect('/dashboard');
       });
-  });
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
+  })
 });
 
 // DELETE story
@@ -100,6 +109,9 @@ router.delete('/:id',(req,res)=>{
   Story.deleteOne({_id : req.params.id})
    .then(()=>{
      res.redirect('/dashboard');
+   }).catch(error => {
+     console.log("error");
+     res.redirect('/stories')
    })
 })
 
@@ -112,6 +124,9 @@ router.get('/user/:userId',(req,res) => {
     res.render('stories/index',{
       stories : stories
     })
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
   })
 })
 
@@ -125,6 +140,9 @@ router.get('/my',ensureAuthenticated,(req,res) => {
     res.render('stories/index',{
       stories : stories
     })
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
   })
 })
 
@@ -175,6 +193,9 @@ router.post('/comment/:id',(req,res) => {
       res.redirect(`/stories/show/${story.id}`);
     })
 
+  }).catch(error => {
+    console.log("error");
+    res.redirect('/stories')
   })
 })
 
