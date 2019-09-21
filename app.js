@@ -88,7 +88,7 @@ app.use('/stories',stories);
 
 
 
-const port = process.env.PORT ||50000; // to open live , in heroku it 4000
+const port = process.env.PORT || 9999; // to open live , in heroku it 4000
 
 app.listen(port,()=>{
   console.log(`server started on port ${port}`);
